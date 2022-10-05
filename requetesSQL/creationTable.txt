@@ -36,8 +36,8 @@ FOREIGN KEY(id_equipe) REFERENCES Equipe(id));
 CREATE TABLE MatchTable
 (id INTEGER(5) NOT NULL PRIMARY KEY,
 jouer TINYINT(1) NOT NULL,
-heure_debut DATE NOT NULL,
-heure_fin DATE NOT NULL,
+heure_debut DATETIME NOT NULL,
+heure_fin DATETIME NOT NULL,
 id_equipe_dom INTEGER(5) NOT NULL,
 id_equipe_ext INTEGER(5) NOT NULL,
 id_stade INTEGER(5) NOT NULL,
