@@ -1,6 +1,8 @@
 
 import mysql.connector
 import generateur
+import datetime
+
 
 conn = mysql.connector.connect(host='localhost',port='3306', user='root', password='', database = 'bd_sporttrack')
 cursor = conn.cursor()
@@ -160,7 +162,7 @@ def round_robin(idEquipe):
         planification.append(journee)
     return planification
 
-def planifierMatch(idChampionnat):
+def planifierMatch(idChampionnat, debutSaison):
     listeRencontre = []
     #Récupérer les idEquipe que l'on va stocker dans un tableau
     listeIdEquipe = []
@@ -175,18 +177,38 @@ def planifierMatch(idChampionnat):
 
     #Planification de journée:
     planification = round_robin(listeIdEquipe)
-    for i in range(len(planification)):
+    '''for i in range(len(planification)):
         print("__________Journée " + str(i+1) + "__________")
         for j in range(len(planification[i])):
             query = "SELECT nom FROM Equipe WHERE id = %s OR id = %s"
             val = [planification[i][j][0], planification[i][j][1]]
             cursor.execute(query, val)
             record = cursor.fetchall()
-            print(record[0][0], " vs ", record[1][0])
+            print(record[0][0], " vs ", record[1][0])'''
 
-    
-for i in range(3):
-    creerChampionnat()
+    #Gerer la date sous le format DATETIME : 1000-01-01 00:00:
+    dicoDate = {}
+    dateActuelle = debutSaison
+    for i in range(len(planification)):
+        dateActuelle += datetime.timedelta(weeks=1)
+        if dateActuelle < datetime.date(dateActuelle.year, 12, 15) and dateActuelle > datetime.date(dateActuelle.year, 1, 10):
+            dicoDate[i+1] = dateActuelle
+    print(dicoDate)
 
+
+
+planifierMatch(36949, datetime.date(2022, 8, 28))
+
+'''dateDebut = datetime.date(2022, 8, 28)
+dateFin = datetime.date(2023, 6, 11)
+dateActuelle = dateDebut
+nombreDeDimanche = 0
+while True:
+    print(dateActuelle)
+    dateActuelle += datetime.timedelta(weeks=1)
+    nombreDeDimanche +=1
+    if(dateActuelle > dateFin):
+        break
+print(nombreDeDimanche-len(dateCoupeDeFrance2022))'''
 
 conn.disconnect()
