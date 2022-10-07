@@ -2,7 +2,7 @@
 import mysql.connector
 import generateur
 import datetime
-
+import random
 
 conn = mysql.connector.connect(host='localhost',port='3306', user='root', password='', database = 'bd_sporttrack')
 cursor = conn.cursor()
@@ -208,8 +208,9 @@ def planifierMatch(idChampionnat, debutSaison):
             idEquipeDom = planification[i][j][0] 
             idEquipeExt = planification[i][j][1]
             #On récupère les horaires et la date
-            heureDebut = datetime.datetime(dateJournee.year, dateJournee.month, dateJournee.day, 14, 30, 00)
-            heureFin = datetime.datetime(dateJournee.year, dateJournee.month, dateJournee.day, 16, 15, 00)
+            heure = random.randint(13, 21)
+            heureDebut = datetime.datetime(dateJournee.year, dateJournee.month, dateJournee.day, heure, 30, 00)
+            heureFin = datetime.datetime(dateJournee.year, dateJournee.month, dateJournee.day, heure+2, 15, 00)
             #On récupère le stade de l'équipe domicile
             query = "SELECT id_stade FROM Equipe WHERE id = %s"
             val = [idEquipeDom]
@@ -235,7 +236,7 @@ def planifierMatch(idChampionnat, debutSaison):
             conn.commit()
 
 
-planifierMatch(27043, datetime.date(2022, 8, 28))
+planifierMatch(36949, datetime.date(2022, 8, 28))
 
 '''dateDebut = datetime.date(2022, 8, 28)
 dateFin = datetime.date(2023, 6, 11)
