@@ -18,4 +18,4 @@ Ce script à pour but de remplir seulement certaine table de la base de données
 | **MatchTable**  | Données des rencontres des équipes du district |
 | **evenementMatch**  | Les évènements qui se passe pendant un matchs, les buts par exemple |
 
-Les requêtes de créations de ces tables ce trouvent dans [ce fichier](requeteSQL/creationTable.txt).
+Les requêtes de créations de ces tables ce trouvent dans [ce fichier](requeteSQL/creationTable.txt).²
