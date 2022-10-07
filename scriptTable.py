@@ -1,4 +1,5 @@
 
+from secrets import choice
 import mysql.connector
 import generateur
 import datetime
@@ -227,6 +228,37 @@ def planifierMatch(idChampionnat, debutSaison):
             cursor.execute(query, val)
             conn.commit()
 
+def simulerMatch(idMatch, dureeMatch=90, frequenceEvent=5):
+    #Récupérer les informations du match
+    query = 'SELECT id_equipe_dom, id_equipe_ext FROM MatchTable WHERE id = %s'
+    val = [idMatch]
+    cursor.execute(query, val)
+    record = cursor.fetchall()
+    equipes = []
+    #On stock les équipes dans un tableau
+    equipes.append(record[0][0])
+    equipes.append(record[0][1])
+    for i in range(dureeMatch):
+        probaEvenement = random.randint(0, 100)
+        if probaEvenement <= frequenceEvent:
+            typeEvent = generateur.evenementAleatoire()
+            tempsEvent = i
+            equipeConcernee = choice(equipes)
+            #On va récupérer un joueur aléatoire dans l'équipe
+            query = "SELECT licence FROM Joueur WHERE id_equipe=%s AND poste IN ('DEFENSEUR', 'MILIEU', 'ATTAQUANT')"
+            val = [equipeConcernee]
+            cursor.execute(query, val)
+            record = cursor.fetchall()
+            joueursConcernes = []
+            for j in range(len(record)):
+                joueursConcernes.append(record[j][0])
+            licenceJoueur = choice(joueursConcernes)
+            #On insère la ligne dans la table Event
+            query = 'INSERT INTO EvenementMatch (id_match, licence_joueur, type, temps) VALUES (%s, %s, %s, %s)'
+            val = [idMatch, licenceJoueur, typeEvent, tempsEvent]
+            cursor.execute(query, val)
+            conn.commit()
+    print('Match ', idMatch, ' simulé')
 
-
+simulerMatch(18675)
 conn.disconnect()

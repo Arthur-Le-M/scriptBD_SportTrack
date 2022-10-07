@@ -182,12 +182,8 @@ def remplirChampionnat(championnat):
 
 #Simulation de match
 def evenementAleatoire():
-    evenementPossible = ['BUT', 'CARTON_JAUNE', 'CARTON_ROUGE']
+    evenementPossible = ['BUT']
     i = random.randint(0, len(evenementPossible)-1)
     return evenementPossible[i]
-
-
-for i in range(9):
-    print(evenementAleatoire())
 
 print("Chargement terminé")
