@@ -258,7 +258,75 @@ def simulerMatch(idMatch, dureeMatch=90, frequenceEvent=5):
             val = [idMatch, licenceJoueur, typeEvent, tempsEvent]
             cursor.execute(query, val)
             conn.commit()
+
+            #On modifie la ligne du match pour changer son état à joué
+            query = "UPDATE MatchTable SET jouer = 1 WHERE id=%s"
+            val = [idMatch]
+            cursor.execute(query, val)
+            conn.commit()
+
     print('Match ', idMatch, ' simulé')
 
-simulerMatch(18675)
+def simulerJournee(numJournee):
+    query = "SELECT id FROM MatchTable WHERE journee = %s"
+    val = [numJournee]
+    cursor.execute(query, val)
+    equipe = cursor.fetchall()
+    print(equipe)
+    for i in range(len(equipe)):
+        simulerMatch(equipe[i][0])
+
+#Création d'un script principal
+def genererBD(nbChampionnat, nbJourneeASimuler, debutSaison):
+    #Création des championnats équipes, joueurs, stades
+    championnat = []
+    for i in range(nbChampionnat):
+        idChamp = creerChampionnat()
+        championnat.append(idChamp)
+    
+    #Prévition des matchs
+    for i in range(len(championnat)):
+        planifierMatch(championnat[i], debutSaison)
+
+    #Simulation des matchs
+    for i in range(nbJourneeASimuler):
+        simulerJournee(i+1)
+
+#Fonction pour vider la base de données
+def clearBD():
+    query = "DELETE FROM evenementMatch WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM MatchTable WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM participerChampionnat WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM championnat WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM Inscrit WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM Joueur WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM equipe WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+
+    query = "DELETE FROM Stade WHERE 1"
+    cursor.execute(query)
+    conn.commit()
+#Format de date utilisé : date = datetime.date(2022, 8, 12)
+
+clearBD()
+genererBD(3, 6, datetime.date(2022, 8, 21))
 conn.disconnect()
