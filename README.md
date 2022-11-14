@@ -36,7 +36,7 @@ Type VARCHAR(25));
 
 CREATE TABLE Equipe
 (id INTEGER(5) NOT NULL PRIMARY KEY,
-nom VARCHAR(25) NOT NULL,
+nom VARCHAR(100) NOT NULL,
 ville VARCHAR(35) NOT NULL,
 id_stade INTEGER(5) NOT NULL,
 couleur VARCHAR(7) NOT NULL,
@@ -76,7 +76,7 @@ FOREIGN KEY(id_equipe_ext) REFERENCES Equipe(id),
 FOREIGN KEY(id_stade) REFERENCES Stade(id));
 
 CREATE TABLE EvenementMatch
-(id INTEGER(5) NOT NULL PRIMARY KEY,
+(id INTEGER(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_match INTEGER(5) NOT NULL,
 licence_joueur VARCHAR(10) NOT NULL,
 type VARCHAR(15) NOT NULL,
@@ -91,6 +91,23 @@ licence VARCHAR(10) NOT NULL,
 mail VARCHAR(50) NOT NULL,
 mdp VARCHAR(50) NOT NULL,
 FOREIGN KEY(licence) REFERENCES Joueur(licence));
+
+CREATE TABLE Message
+(id INTEGER(5) NOT NULL PRIMARY KEY,
+id_auteur INTEGER(5) NOT NULL FOREIGN KEY(Inscrit) REFERENCES(id),
+id_destinataire INTEGER(5) NOT NULL FOREIGN KEY(Inscrit) REFERENCES(id),
+date DATE NOT NULL,
+contenu TEXT NOT NULL);
+
+CREATE TABLE EventCalendrier
+(id INTEGER(5) NOT NULL PRIMARY KEY,
+intitule VARCHAR(20) NOT NULL,
+heure_deb DATE NOT NULL,
+heure_fin DATE NOT NULL,
+id_equipe INTEGER(5) NOT NULL FOREIGN KEY(Equipe),
+id_stade INTEGER(5) NOT NULL FOREIGN KEY(Stade),
+id_createur INTEGER(5) NOT NULL FOREIGN KEY(Inscrit)
+commentaire TEXT);
 ```
 
 - Maintenant que les tables sont créer il faut configurer la connexion à la base de données dans le fichier ```scriptTable.py``` à la ligne 8.
