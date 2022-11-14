@@ -84,6 +84,13 @@ temps INTEGER(2) NOT NULL,
 commentaire TEXT,
 FOREIGN KEY(id_match) REFERENCES MatchTable(id),
 FOREIGN KEY(licence_joueur) REFERENCES Joueur(licence));
+
+CREATE TABLE Inscrit
+(id INTEGER(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+licence VARCHAR(10) NOT NULL,
+mail VARCHAR(50) NOT NULL,
+mdp VARCHAR(50) NOT NULL,
+FOREIGN KEY(licence) REFERENCES Joueur(licence));
 ```
 
 - Maintenant que les tables sont créer il faut configurer la connexion à la base de données dans le fichier ```scriptTable.py``` à la ligne 8.
