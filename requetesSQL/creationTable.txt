@@ -57,7 +57,6 @@ commentaire TEXT,
 FOREIGN KEY(id_match) REFERENCES MatchTable(id),
 FOREIGN KEY(licence_joueur) REFERENCES Joueur(licence));
 
-
 CREATE TABLE Inscrit
 (id INTEGER(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 licence VARCHAR(10) NOT NULL,
