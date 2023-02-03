@@ -10,3 +10,6 @@ class Stade:
     
     def toString(self):
         return(self.nom + " / " + self.ville + " / " + self.adresse + " / " + self.codePostal + " / " + self.type)
+    
+    def getVille(self):
+        return self.ville

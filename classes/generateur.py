@@ -75,4 +75,22 @@ class Generateur:
         adresseRandom += " " + self.adresse[index]
         return adresseRandom
 
+    def generateTeamName(self, cityName):
+        teamName = ""
+        sigle = ["AJ", "AS", "FC", "Olympique", "SC", "RC", "US", "EA", "ES", "CO", "CA", "SM", "CS"]
+        fin = random.randint(0, 1)
+        indexSigle = random.randint(0, len(sigle)-1)
+        if fin == 1:
+            teamName += cityName + " " + sigle[indexSigle]
+        else:
+            teamName += sigle[indexSigle] + " " + cityName
+        return teamName
+    
+    def rgb_to_hex(self, rgb):
+        return '%02x%02x%02x' % rgb
+
+    def generateColor(self):
+        couleur = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        hexa = "#" + str(self.rgb_to_hex(couleur))
+        return hexa
     

@@ -2,15 +2,17 @@
 from generateur import *
 from joueur import *
 from stade import *
+from equipe import *
 
 
 #Main
 def main():
     gen = Generateur()
-    j = Joueur(gen, "ATTAQUANT", 45678)
     s = Stade(gen)
+    e = Equipe(gen, s)
+    j = Joueur(gen, "ATTAQUANT", e)
+    
     print(j.toString())
-    print(s.toString())
 
 main()
     
