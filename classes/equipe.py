@@ -8,3 +8,6 @@ class Equipe:
     
     def toString(self):
         return(self.nom + " / " + self.ville + " / " + self.couleur + " / " + self.stade.toString())
+
+    def getStade(self):
+        return self.stade

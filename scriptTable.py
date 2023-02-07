@@ -133,20 +133,20 @@ def creerChampionnat():
 def inverseTuple(ancienTuple):
     return (ancienTuple[1], ancienTuple[0])
 
-def round_robin(idEquipe):
+def round_robin(tableIdEquipe):
     arretable = False
     #Tuple définit pour le cas d'arrêt
-    arret = (idEquipe[0], idEquipe[len(idEquipe)-1])
+    arret = (tableIdEquipe[0], tableIdEquipe[len(tableIdEquipe)-1])
     #Cas de tableau impaire
-    if len(idEquipe) % 2:
-        idEquipe.append(None)
+    if len(tableIdEquipe) % 2:
+        tableIdEquipe.append(None)
     planification = []
     while True:
         #Création de la journée
         journee = []
-        for i in range(int(len(idEquipe) / 2)):
-            journee.append((idEquipe[i], idEquipe[len(idEquipe) - i - 1]))
-        idEquipe.insert(1, idEquipe.pop())
+        for i in range(int(len(tableIdEquipe) / 2)):
+            journee.append((tableIdEquipe[i], tableIdEquipe[len(tableIdEquipe) - i - 1]))
+        tableIdEquipe.insert(1, tableIdEquipe.pop())
         #Condition d'arrêt
         if journee[0] == arret and arretable == True:
             break
