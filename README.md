@@ -1,6 +1,6 @@
 # Réécriture du projet en mode objet en cours
 
-#...
+# ...
 
 # Script Base de données pour l'application Sport Track
 
