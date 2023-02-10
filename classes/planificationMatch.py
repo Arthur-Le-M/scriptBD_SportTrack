@@ -48,8 +48,6 @@ class PlanificationMatch:
     
     def getListeMatch(self):
         return self.listeMatch
-            
-
 
     #Méthode privées propre à cette classe
     def inverseTuple(self, ancienTuple):
@@ -84,3 +82,6 @@ class PlanificationMatch:
                 journee.append(self.inverseTuple(premierePartieSaison[i][j]))
             planification.append(journee)
         return planification
+
+    def getListeMatch(self):
+        return self.listeMatch

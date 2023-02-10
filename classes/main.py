@@ -11,21 +11,9 @@ from planificationMatch import *
 #Main
 def main():
     gen = Generateur()
-    s = Stade(gen)
-    e = Equipe(gen, s)
-    j = Joueur(gen, "ATTAQUANT", e)
-    c = Championnat("D1 Pyrénées Atlantiques", "D1")
-    pc = ParticiperChampionnat(e, c)
+    c = Championnat("D1 Pyrénées Atlantiques", "D1", gen)
+    print(c.planification.listeMatch)
+    c.simulerJournee(5)
 
-    tabEquipe = []
-    for i in range(10):
-        sTest = Stade(gen)
-        tabEquipe.append(Equipe(gen, sTest))
-    
-    planif = PlanificationMatch(tabEquipe);
-    print(planif.listeMatch[1][0].toString())
-
-    print(j.toString())
-    print(pc.toString())
 main()
     

@@ -1,9 +1,7 @@
+#Main
 def main():
     gen = Generateur()
-    s = Stade(gen)
-    e = Equipe(gen, s)
-    j = Joueur(gen, "ATTAQUANT", e)
-    
-    print(j.toString())
+    c = Championnat("D1 Pyrénées Atlantiques", "D1", gen)
 
 main()
+    
