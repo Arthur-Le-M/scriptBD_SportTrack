@@ -16,4 +16,3 @@ def main():
     c.simulerJournee(5)
 
 main()
-    

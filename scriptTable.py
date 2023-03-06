@@ -254,8 +254,8 @@ def simulerMatch(idMatch, dureeMatch=90, frequenceEvent=5):
                 joueursConcernes.append(record[j][0])
             licenceJoueur = choice(joueursConcernes)
             #On insère la ligne dans la table Event
-            query = 'INSERT INTO EvenementMatch (id_match, licence_joueur, type, temps) VALUES (%s, %s, %s, %s)'
-            val = [idMatch, licenceJoueur, typeEvent, tempsEvent]
+            query = 'INSERT INTO EvenementMatch (id_match, id_Equipe, licence_joueur, type, temps) VALUES (%s, %s, %s, %s, %s)'
+            val = [idMatch, equipeConcernee, licenceJoueur, typeEvent, tempsEvent]
             cursor.execute(query, val)
             conn.commit()
 
