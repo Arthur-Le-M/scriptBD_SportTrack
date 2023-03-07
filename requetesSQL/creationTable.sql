@@ -78,7 +78,7 @@ CREATE TABLE messages (
 CREATE TABLE Calendrier (
   id INT(6) AUTOINCREMENT PRIMARY KEY,
   categorie VARCHAR(60),
-  type VARCHAR(255),
+  type_ VARCHAR(255),
   debut DATETIME,
   fin DATETIME,
   idEquipe INT(6),
