@@ -46,6 +46,15 @@ id_stade INTEGER(5) NOT NULL,
 couleur VARCHAR(7) NOT NULL,
 FOREIGN KEY (id_stade) REFERENCES Stade(id));	
 
+CREATE TABLE Joueur
+(licence VARCHAR(10) NOT NULL PRIMARY KEY,
+nom VARCHAR(50) NOT NULL,
+prenom VARCHAR(50) NOT NULL,
+id_equipe INTEGER(5) NOT NULL,
+poste VARCHAR(50) NOT NULL,
+FOREIGN KEY(id_equipe) REFERENCES Equipe(id)
+);
+
 CREATE TABLE Championnat
 (id INTEGER(5) NOT NULL PRIMARY KEY,
 intitule VARCHAR(25) NOT NULL,
@@ -57,13 +66,6 @@ id_championnat INTEGER(5) NOT NULL,
 PRIMARY KEY(id_equipe, id_championnat),
 FOREIGN KEY(id_equipe) REFERENCES Equipe(id),
 FOREIGN KEY(id_championnat) REFERENCES Championnat(id));
-CREATE TABLE Joueur
-(licence VARCHAR(10) NOT NULL PRIMARY KEY,
-nom VARCHAR(25) NOT NULL,
-prenom VARCHAR(25) NOT NULL,
-id_equipe INTEGER(5) NOT NULL,
-poste VARCHAR(15)NOT NULL,
-FOREIGN KEY(id_equipe) REFERENCES Equipe(id));
 
 CREATE TABLE MatchTable
 (id INTEGER(5) NOT NULL PRIMARY KEY,
@@ -82,6 +84,7 @@ FOREIGN KEY(id_stade) REFERENCES Stade(id));
 CREATE TABLE EvenementMatch
 (id INTEGER(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_match INTEGER(5) NOT NULL,
+id_equipe INTEGER(5) NOT NULL,
 licence_joueur VARCHAR(10) NOT NULL,
 type VARCHAR(15) NOT NULL,
 temps INTEGER(2) NOT NULL,
@@ -96,22 +99,25 @@ mail VARCHAR(50) NOT NULL,
 mdp VARCHAR(50) NOT NULL,
 FOREIGN KEY(licence) REFERENCES Joueur(licence));
 
-CREATE TABLE Message
-(id INTEGER(5) NOT NULL PRIMARY KEY,
-id_auteur INTEGER(5) NOT NULL FOREIGN KEY(Inscrit) REFERENCES(id),
-id_destinataire INTEGER(5) NOT NULL FOREIGN KEY(Inscrit) REFERENCES(id),
-date DATE NOT NULL,
-contenu TEXT NOT NULL);
+CREATE TABLE messages (
+  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  message TEXT NOT NULL,
+  id_destinataire INT(11) NOT NULL,
+  id_auteur INT(11) NOT NULL,
+  date DATETIME NOT NULL
+);
 
-CREATE TABLE EventCalendrier
-(id INTEGER(5) NOT NULL PRIMARY KEY,
-intitule VARCHAR(20) NOT NULL,
-heure_deb DATE NOT NULL,
-heure_fin DATE NOT NULL,
-id_equipe INTEGER(5) NOT NULL FOREIGN KEY(Equipe),
-id_stade INTEGER(5) NOT NULL FOREIGN KEY(Stade),
-id_createur INTEGER(5) NOT NULL FOREIGN KEY(Inscrit)
-commentaire TEXT);
+CREATE TABLE Calendrier (
+  id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  categorie VARCHAR(60),
+  type_ VARCHAR(255),
+  debut DATETIME,
+  fin DATETIME,
+  idEquipe INT(6),
+  idStade INT(6),
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(id),
+  FOREIGN KEY (idStade) REFERENCES Stade(id)
+);
 ```
 
 - Maintenant que les tables sont créer il faut configurer la connexion à la base de données dans le fichier ```scriptTable.py``` à la ligne 8.

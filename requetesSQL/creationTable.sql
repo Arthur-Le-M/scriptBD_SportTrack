@@ -72,11 +72,11 @@ CREATE TABLE messages (
   message TEXT NOT NULL,
   id_destinataire INT(11) NOT NULL,
   id_auteur INT(11) NOT NULL,
-  date DATETIME NOT NULL,
+  date DATETIME NOT NULL
 );
 
 CREATE TABLE Calendrier (
-  id INT(6) AUTOINCREMENT PRIMARY KEY,
+  id INT(6) AUTO_INCREMENT PRIMARY KEY,
   categorie VARCHAR(60),
   type_ VARCHAR(255),
   debut DATETIME,
